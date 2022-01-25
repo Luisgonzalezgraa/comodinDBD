@@ -21,6 +21,7 @@ class CreatePublicacionsTable extends Migration
             $table->unsignedBigInteger('idLibro')->nullable();
             $table->foreign('idLibro')->references('id')->on('libros');
             $table->date('fechaPublicacion');
+            $table->boolean('delete');
 
         });
     }

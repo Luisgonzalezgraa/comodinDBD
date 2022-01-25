@@ -20,6 +20,7 @@ class CreateLibrosTable extends Migration
             $table->string('linkLibro')->unique();
             $table->string('autor');
             $table->date('fechaCreacion');
+            $table->boolean('delete');
 
         });
     }

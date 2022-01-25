@@ -17,10 +17,10 @@ class CreateUsuariosTable extends Migration
             $table->id();
             $table->string('nombreUsuario');
             $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
             $table->string('contrasenia');
             $table->date('fechaNacimiento');
             $table->timestamps();
+            $table->boolean('delete');
 
 
         });
