@@ -16,6 +16,8 @@ class CreateRolsTable extends Migration
         Schema::create('rols', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->string('nombreRol');
+            $table->boolean('delete')
         });
     }
 

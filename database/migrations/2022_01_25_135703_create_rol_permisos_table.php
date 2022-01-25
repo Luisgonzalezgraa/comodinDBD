@@ -16,6 +16,12 @@ class CreateRolPermisosTable extends Migration
         Schema::create('rol_permisos', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->boolean('delete');
+            $table->unsignedBigInteger('idRol')->nullable();
+            $table->foreign('idRol')->references('id')->on('rols');
+
+            $table->unsignedBigInteger('idPermiso')->nullable();
+            $table->foreign('idPermiso')->references('id')->on('permisos');
         });
     }
 

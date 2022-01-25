@@ -16,6 +16,13 @@ class CreateDescargasTable extends Migration
         Schema::create('descargas', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->unsignedBigInteger('idUsuario')->nullable();
+            $table->foreign('idUsuario')->references('id')->on('usuarios');
+            $table->unsignedBigInteger('idLibro')->nullable();
+            $table->foreign('idLibro')->references('id')->on('libros');
+            $table->date('fechaDescarga');
+            $table->date('fechaEntrega');
+
         });
     }
 

@@ -16,6 +16,11 @@ class CreateUsuarioRolsTable extends Migration
         Schema::create('usuario_rols', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->unsignedBigInteger('idUsuario')->nullable();
+            $table->foreign('idUsuario')->references('id')->on('usuarios');
+            $table->unsignedBigInteger('idRol')->nullable();
+            $table->foreign('idRol')->references('id')->on('rols');
+            $table->boolean('delete');
         });
     }
 
