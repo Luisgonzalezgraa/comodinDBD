@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Descargas extends Model
 {
     use HasFactory;
+    public function usuario(){
+        return $this->belongsTo('App\Models\Usuario');
+    }
+
+    public function libros(){
+        return $this->belongsTo('App\Models\Libros');
+    }
 }

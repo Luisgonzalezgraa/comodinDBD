@@ -17,7 +17,7 @@ class CreateRolsTable extends Migration
             $table->id();
             $table->timestamps();
             $table->string('nombreRol');
-            $table->boolean('delete')
+            $table->boolean('delete');
         });
     }
 
