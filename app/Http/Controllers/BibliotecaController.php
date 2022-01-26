@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Libros;
 use App\Models\Usuario;
+use App\Models\Biblioteca;
 use Illuminate\Support\Facades\Validator;
 
 class BibliotecaController extends Controller
