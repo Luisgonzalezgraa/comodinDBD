@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use App\Models\Permisos;
 
 class PermisosController extends Controller
 {
@@ -13,7 +15,17 @@ class PermisosController extends Controller
      */
     public function index()
     {
-        //
+        $permiso = Permisos::all()->where('delete',FALSE);
+        if($permiso != NULL){
+            return response()->json($permiso);
+
+        }
+        else{
+            return response()->json([
+                'msg' => 'No existen permisos'
+            ],404);
+        }
+    }
     }
 
     /**
@@ -34,7 +46,38 @@ class PermisosController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make(
+            [
+                'nombre' => $request->nombre,
+            
+            ],
+
+            [
+                'nombre' => 'required',
+            ]
+            );
+        if($validator->fails())
+        {
+            return response()->json([
+                'msg' => 'Datos ingresados invalidos'
+            ]);
+        }
+
+
+        $permiso = new Permisos();
+        $permiso->nombre = $request->nombre;
+        $permiso->delete = FALSE;
+        $permiso->save();
+
+        if($permiso != NULL){
+            return response()->json([
+                'msg' => 'se ha creado un nuevo permiso'
+            ],202);
+
+        return response()->json([
+            'msg' => 'no se ha creado el permiso'
+        ]);    
+        }
     }
 
     /**
@@ -45,7 +88,13 @@ class PermisosController extends Controller
      */
     public function show($id)
     {
-        //
+        $permiso = Permisos::find($id);
+        if($permiso != NULL){
+            return response()->json($permiso);
+        }
+        return response()->json([
+            'msg' => 'no se encontro ningun valor con la id asociada'
+        ]);
     }
 
     /**
@@ -68,7 +117,35 @@ class PermisosController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validator = Validator::make(
+            [
+                'nombre' => $request->nombre,
+            ],
+
+            [
+                'nombre' => 'required|min:3',
+
+            ]
+            );
+        if($validator->fails())
+        {
+            return response()->json([
+                'msg' => 'Datos ingresados invalidos'
+            ]);
+        }
+
+        $permiso = Permisos::find($id);
+        if($permiso == NULL){
+            return response()->json([
+                "message" => 'El id es invalido'
+            ]);
+        }
+        if ($request->nombre!= NULL) {
+            $permiso->nombre = $request->nombre;
+        }
+
+        $permiso->save();
+        return response()->json($permiso);
     }
 
     /**
